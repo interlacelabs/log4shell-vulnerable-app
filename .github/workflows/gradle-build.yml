@@ -16,6 +16,9 @@ jobs:
             gradle-version: 7.3.1
         # - run: gradle build --dry-run # just test build configuration
         - run: gradle bootJar --no-daemon
-        - run: ls -ltr build/libs"
-        - run: gradle publishToLocalRepo
-        - run: ls -ltr build/publications/maven"
+        - run: |
+            ls -ltr build/libs
+        - run: |
+            gradle publishToLocalRepo
+        - run: |
+            ls -ltr build/publications/maven"
