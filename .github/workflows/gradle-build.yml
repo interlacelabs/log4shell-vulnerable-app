@@ -20,6 +20,6 @@ jobs:
         - run: |
             ls -R build
         - run: |
-            gradlew publishToLocalRepo
+            ./gradlew publishToLocalRepo
         - run: |
             ls -R build
