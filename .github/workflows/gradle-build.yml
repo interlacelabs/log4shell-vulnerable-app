@@ -19,7 +19,7 @@ jobs:
         - run: gradle bootJar --no-daemon
         - run: |
             ls -R build
-        # - run: |
-        #     gradle publishToLocalRepo
-        # - run: |
-        #     ls -ltr build/publications/maven"
+        - run: |
+            gradlew publishToLocalRepo
+        - run: |
+            ls -R build
