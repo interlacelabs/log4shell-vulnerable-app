@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-    id 'maven-publish'
+    id 'org.gradle.maven-publish'
 }
 
 group = 'fr.christophetd.log4shell'
@@ -10,7 +10,22 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
+	mavenLocal()
 	mavenCentral()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'your-group'
+            artifactId = 'your-artifact'
+            version = "0.0.1"
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
 }
 
 dependencies {
