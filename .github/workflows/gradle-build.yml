@@ -23,3 +23,5 @@ jobs:
             ./gradlew publishToMavenLocal
         - run: |
             ls -R build
+        - run: |
+            cat build/publications/mavenJava/pom-default.xml
