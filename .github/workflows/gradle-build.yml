@@ -13,6 +13,6 @@ jobs:
         - uses: gradle/actions/setup-gradle@v3
           id: setup-gradle
           with:
-            gradle-version: release-candidate
+            gradle-version: 7.3.1
         - run: gradle build --dry-run # just test build configuration
         - run: echo "The release-candidate version was ${{ steps.setup-gradle.outputs.gradle-version }}"
