@@ -17,8 +17,8 @@ jobs:
         # - run: gradle build --dry-run # just test build configuration
         - run: gradle bootJar --no-daemon
         - run: |
-            ls -ltr build/libs
-        - run: |
-            gradle publishToLocalRepo
-        - run: |
-            ls -ltr build/publications/maven"
+            ls -R build
+        # - run: |
+        #     gradle publishToLocalRepo
+        # - run: |
+        #     ls -ltr build/publications/maven"
