@@ -42,7 +42,7 @@ jobs:
           target: ${{ matrix.target }}
           debug: true
           tools: sca
-          autofix: true
+          # autofix: true - currently support bazel (e.g. WORKSPACE.bazel)
   display-results:
     runs-on: ubuntu-22.04
     name: Display results
