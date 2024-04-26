@@ -21,7 +21,7 @@ M2_HOME='/opt/apache-maven-3.9.6'
 PATH="$M2_HOME/bin:$PATH"
 export PATH
 mvn -version
-mvn package
+mvn clean package
 cp target/log4shell-vulnerable-app-0.0.1-SNAPSHOT.jar app.jar
 
 

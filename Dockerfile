@@ -9,7 +9,6 @@
 # && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
 # && apt update && apt install bazel
 
-
 # FROM openjdk:8u181-jdk-alpine
 # EXPOSE 8080
 # RUN mkdir /app
