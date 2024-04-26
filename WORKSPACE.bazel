@@ -1,0 +1,37 @@
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+go_repository(
+    name = "org_golang_x_net",
+    build_file_proto_mode = "disable",
+    importpath = "golang.org/x/net",
+    sum = "h1:cfawfvKITfUsFCeJIHJrbSxpeu/E81khclypR0GVT50=",
+    version = "v0.12.0",
+)
+maven_install(
+    name = "maven",
+    artifacts = [
+        maven.artifact("mysql", "mysql-connector-java", "5.1.49"),
+    ],
+    repositories = [
+        "https://repo.maven.apache.org/maven2",  # central
+        "https://repo1.maven.org/maven2/",  # central, required by oci-sdk
+    ],
+)
+maven_install(
+    name = "maven",
+    artifacts = [
+        maven.artifact("org.apache.hadoop", "hadoop-common", "2.2.0"),
+    ],
+    repositories = [
+        "https://repo1.maven.org/maven2/org/apache/hadoop/",  
+    ],
+)
+maven_install(
+    name = "maven",
+    artifacts = [
+        maven.artifact("log4j", "log4j", "1.2.17"),
+    ],
+    repositories = [
+        "https://repo1.maven.org/maven2/log4j",  
+    ],
+)
