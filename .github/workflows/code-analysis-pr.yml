@@ -41,6 +41,8 @@ jobs:
             gradle bootJar --no-daemon
             ./gradlew publishToMavenLocal
             cp build/publications/mavenJava/pom-default.xml pom.xml
+            cat pom.xml
+            mvn package
       - name: Analyze
         uses: lacework/code-security-action@v1
         with:
