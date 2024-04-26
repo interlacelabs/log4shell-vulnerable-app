@@ -1,6 +1,6 @@
 *.class
-build/
+/build
 .idea
 .gradle
-bazel*
-target*
+/bazel*
+/target*

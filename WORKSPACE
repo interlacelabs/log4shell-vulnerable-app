@@ -21,6 +21,14 @@ http_archive(
     sha256="220b87d8cfabd22d1c6d8e3cdb4249abd4c93dcc152e0667db061fb1b957ee68",
 )
 
+http_archive(
+    name = "rules_spring",
+    sha256 = "87b337f95f9c09a2e5875f0bca533b050c9ccb8b0d2c92915e290520b79d0912",
+    urls = [
+        "https://github.com/salesforce/rules_spring/releases/download/2.3.2/rules-spring-2.3.2.zip",
+    ],
+)
+
 
 # Bazel's JDK rules
 http_archive(
@@ -41,7 +49,13 @@ maven_install(
         "org.springframework.boot:spring-boot-starter-log4j2:2.6.1",
         "org.springframework.boot:spring-boot-dependencies:2.6.1",
         "org.springframework.boot:spring-boot:2.6.1",
+        "org.springframework.boot:spring-boot-loader:2.6.1",
+        "org.springframework.boot:spring-boot-loader-tools:2.6.1",
+        "org.springframework.boot:spring-boot-starter-jetty:2.6.1",
+        "org.springframework.boot:spring-boot-actuator:2.6.1",
+        "org.springframework.boot:spring-boot-actuator-autoconfigure:2.6.1",
         "org.springframework:spring-web:5.3.13",  # For RestController
+        "org.apache.logging.log4j:log4j-core:2.14.1",  # For Logger
         "org.apache.logging.log4j:log4j-api:2.14.1",  # For Logger
         "org.springframework.boot:spring-boot-autoconfigure:2.6.1",  # For SpringBootApplication
     ],
