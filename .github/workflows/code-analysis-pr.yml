@@ -16,41 +16,35 @@ env:
 name: Lacework Code Analysis (PR)
 jobs:
   run-analysis:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
+    name: Run analysis
     strategy:
       matrix:
         target: [new, old]
     steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-    #   - uses: actions/setup-java@v4
-    #     with:
-    #       distribution: temurin
-    #       java-version: 17
-    #   - uses: gradle/actions/setup-gradle@v3
-    #     id: setup-gradle
-    #     with:
-    #       gradle-version: 7.3.1
       - name: Checkout old
         if: ${{ matrix.target == 'old' }}
-        run: |
-            git checkout HEAD^1
-    #   - run: |
-    #         gradle bootJar --no-daemon
-    #         ./gradlew publishToMavenLocal
-    #         cp -f build/publications/mavenJava/pom-default.xml pom.xml
+        run: git checkout HEAD^1
+      - name: Build
+        run: mvn package
       - name: Analyze
         uses: lacework/code-security-action@v1
         with:
-          classes: build/libs/log4shell-vulnerable-app-0.0.1-SNAPSHOT.jar
+          classes: target/log4shell-vulnerable-app-0.0.1.jar
           target: ${{ matrix.target }}
           debug: true
           tools: sca
           autofix: true
   display-results:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     name: Display results
     needs:
       - run-analysis
