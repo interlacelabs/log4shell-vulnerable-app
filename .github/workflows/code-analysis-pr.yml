@@ -29,18 +29,19 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - uses: gradle/actions/setup-gradle@v3
-        id: setup-gradle
-        with:
-          gradle-version: 7.3.1
+    #   - uses: gradle/actions/setup-gradle@v3
+    #     id: setup-gradle
+    #     with:
+    #       gradle-version: 7.3.1
       - name: Checkout old
         if: ${{ matrix.target == 'old' }}
         run: |
             git checkout HEAD^1
-      - run: |
-            gradle bootJar --no-daemon
-            ./gradlew publishToMavenLocal
-            cp build/publications/mavenJava/pom-default.xml pom.xml
+    #   - run: |
+    #         gradle bootJar --no-daemon
+    #         ./gradlew publishToMavenLocal
+    #         cp build/publications/mavenJava/pom-default.xml pom.xml
+      - run: mvn package
       - name: Analyze
         uses: lacework/code-security-action@v1
         with:
