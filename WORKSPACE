@@ -47,7 +47,6 @@ maven_install(
     artifacts=[
         "org.apache.logging.log4j:log4j-core:2.11.2",
         "org.apache.logging.log4j:log4j-api:2.11.2",
-        # "org.apache.logging.log4j:log4j-slf4j-impl:2.11.2",
         "org.springframework.boot:spring-boot-starter-parent:2.6.1",
         "org.springframework.boot:spring-boot-starter-web:2.6.1",
         "org.springframework.boot:spring-boot-starter-log4j2:2.6.1",
