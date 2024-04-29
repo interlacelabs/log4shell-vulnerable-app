@@ -3,27 +3,17 @@ load("@rules_java//java:defs.bzl", "java_binary")
 load("@rules_spring//springboot:springboot.bzl", "springboot")
 
 lib_deps = [
-    # "@maven//:org_springframework_boot_spring_boot_starter_web",
-    "@maven//:org_springframework_boot_spring_boot_starter_log4j2",
-    "@maven//:org_springframework_boot_spring_boot",
-    "@maven//:org_springframework_spring_web",  # Added for RestController
-    "@maven//:org_apache_logging_log4j_log4j_api",  # Added for Logger
-    # Added for SpringBootApplication
-    "@maven//:org_springframework_boot_spring_boot_autoconfigure",
 ]
 
 springboot_deps = [
-    "@rules_spring//springboot/import_bundles:springboot_required_deps",
-    "@maven//:org_springframework_boot_spring_boot_starter_jetty",
+    # "@rules_spring//springboot/import_bundles:springboot_required_deps", # <== don't use this prefer fixed version from WORKSPACE
+    "@maven//:org_springframework_boot_spring_boot_starter_log4j2",
+    "@maven//:org_springframework_boot_spring_boot",
     "@maven//:org_springframework_boot_spring_boot_starter_web",
-    "@maven//:org_springframework_boot_spring_boot_loader_tools",
-    "@maven//:org_springframework_spring_webmvc",
-
-    # "@maven//:javax_annotation_javax_annotation_api",
-
-    # bring in same dep again as above, but through a different maven_install
-    # rule: the springboot rule does not package duplicate deps, first one wins
-    # "@spring_boot_starter_jetty//:org_springframework_boot_spring_boot_starter_jetty",
+    "@maven//:org_springframework_boot_spring_boot_autoconfigure",
+    "@maven//:org_springframework_spring_web",  # Added for RestController
+    "@maven//:org_apache_logging_log4j_log4j_api",  # Added for Logger
+    "@maven//:org_springframework_boot_spring_boot_loader"
 ]
 
 # This Java library contains the app code
@@ -49,55 +39,11 @@ springboot(
     #  The springboot rule inherits all deps and runtime_deps from the java_library
     deps=[":rootclassloader_lib", ],
 
-    # TO TEST THE DUPE CLASSES FEATURE:
-    #   There is an intentionally duplicated class in lib1 and lib2. Do this:
-    #   1. set fail_on_duplicate_classes = True
-    #   2. comment out lib1 or lib2 in demoapp_dupeclass_allowlist.txt
-    #   Build should fail due to the duplicate class.
     dupeclassescheck_enable=True,
-    # dupeclassescheck_ignorelist = "demoapp_dupeclass_allowlist.txt",
 
-    # BANNED DEPS
-    # These are dependencies that you never want in your springboot jar.
-    # This is used to detect mistakes in your transitive dependency graph. They
-    # might be test jars, or compile time jars like lombok. The list of strings
-    # is matched against the dependency jar filenames with a 'contains' match.
-    # deps_banned = ["junit", "mockito", "lombok"],
-
-    # Specify optional JVM args to use when the application is launched with 'bazel run'
-    # bazelrun_jvm_flags = "-Dcustomprop=gold -DcustomProp2=silver",
-
-    # data files can be made available in the working directory for when the app is launched with bazel run
-    # bazelrun_data = ["example_data.txt"],
-
-    # run the application in the background (command returns immediately)
-    # bazelrun_background = True,
-
-    # you may choose to override the launcher script that is used when you invoke 'bazel run //examples/demoapp'
-    # bazelrun_script = "custom_bazelrun_script.sh",
-
-    # if you have conflicting classes in dependency jar files, you can define the order in which the jars are loaded
-    #  https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-executable-jar-format.html#executable-jar-war-index-files-classpath
-    # deps_index_file = ":demoapp_classpath.idx",
-
-    # sometimes packagers want to put certain files into the root of the springboot app jar
-    # these addins will be copied into the root of the generated springboot jar
-    # addins = [":info.txt", ":author.txt"],
+    deps_exclude=[
+        "@maven//:org_springframework_boot_spring_boot_starter_logging",
+        "@maven//:ch_qos_logback_logback_classic",
+        "@maven//:org_apache_logging_log4j_log4j_to_slf4j"
+    ]
 )
-
-# Java application target
-# java_binary(
-#     name="app",
-#     srcs=glob(["src/main/java/**/*.java"]),
-#     resources=glob(["src/main/resources/**"]),
-#     main_class="fr.christophetd.log4shell.vulnerableapp.VulnerableAppApplication",
-#     deps=[
-#         "@maven//:org_springframework_boot_spring_boot_starter_web",
-#         "@maven//:org_springframework_boot_spring_boot_starter_log4j2",
-#         "@maven//:org_springframework_boot_spring_boot",
-#         "@maven//:org_springframework_spring_web",  # Added for RestController
-#         "@maven//:org_apache_logging_log4j_log4j_api",  # Added for Logger
-#         # Added for SpringBootApplication
-#         "@maven//:org_springframework_boot_spring_boot_autoconfigure",
-#     ],
-# )

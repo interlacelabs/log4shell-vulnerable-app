@@ -45,6 +45,10 @@ load("@rules_jvm_external//:defs.bzl", "maven_install")
 
 maven_install(
     artifacts=[
+        "org.apache.logging.log4j:log4j-core:2.11.2",
+        "org.apache.logging.log4j:log4j-api:2.11.2",
+        # "org.apache.logging.log4j:log4j-slf4j-impl:2.11.2",
+        "org.springframework.boot:spring-boot-starter-parent:2.6.1",
         "org.springframework.boot:spring-boot-starter-web:2.6.1",
         "org.springframework.boot:spring-boot-starter-log4j2:2.6.1",
         "org.springframework.boot:spring-boot-dependencies:2.6.1",
@@ -54,10 +58,9 @@ maven_install(
         "org.springframework.boot:spring-boot-starter-jetty:2.6.1",
         "org.springframework.boot:spring-boot-actuator:2.6.1",
         "org.springframework.boot:spring-boot-actuator-autoconfigure:2.6.1",
-        "org.springframework:spring-web:5.3.13",  # For RestController
-        "org.apache.logging.log4j:log4j-core:2.14.1",  # For Logger
-        "org.apache.logging.log4j:log4j-api:2.14.1",  # For Logger
+        "org.springframework:spring-web:5.1.8.RELEASE",  # For RestController
         "org.springframework.boot:spring-boot-autoconfigure:2.6.1",  # For SpringBootApplication
+        "org.springframework.boot:spring-boot-loader:2.1.6"
     ],
     repositories=[
         "https://repo1.maven.org/maven2",
