@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+fr.christophetd.log4shell.vulnerableapp.VulnerableAppApplication
