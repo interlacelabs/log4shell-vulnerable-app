@@ -1,4 +1,7 @@
 *.class
-build/
+/build
 .idea
 .gradle
+/bazel*
+/target*
+/apache-maven-*

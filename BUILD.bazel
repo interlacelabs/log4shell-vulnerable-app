@@ -1,0 +1,49 @@
+load("@rules_java//java:defs.bzl", "java_binary")
+
+load("@rules_spring//springboot:springboot.bzl", "springboot")
+
+lib_deps = [
+]
+
+springboot_deps = [
+    # "@rules_spring//springboot/import_bundles:springboot_required_deps", # <== don't use this prefer fixed version from WORKSPACE
+    "@maven//:org_springframework_boot_spring_boot_starter_log4j2",
+    "@maven//:org_springframework_boot_spring_boot",
+    "@maven//:org_springframework_boot_spring_boot_starter_web",
+    "@maven//:org_springframework_boot_spring_boot_autoconfigure",
+    "@maven//:org_springframework_spring_web",  # Added for RestController
+    "@maven//:org_apache_logging_log4j_log4j_api",  # Added for Logger
+    "@maven//:org_springframework_boot_spring_boot_loader"
+]
+
+# This Java library contains the app code
+java_library(
+    name="lib",
+    srcs=glob(["src/main/java/**/*.java"]),
+    resources=glob(["src/main/resources/**"]),
+    deps=springboot_deps + lib_deps,
+)
+
+java_library(
+    name="rootclassloader_lib",
+    srcs=glob(["src_root/main/java/**/*.java"]),
+)
+
+# Build the app as a Spring Boot executable jar
+springboot(
+    name="app",
+    boot_app_class="fr.christophetd.log4shell.vulnerableapp.VulnerableAppApplication",
+    java_library=":lib",
+
+    # DEPS ARE OPTIONAL HERE
+    #  The springboot rule inherits all deps and runtime_deps from the java_library
+    deps=[":rootclassloader_lib", ],
+
+    dupeclassescheck_enable=True,
+
+    deps_exclude=[
+        "@maven//:org_springframework_boot_spring_boot_starter_logging",
+        "@maven//:ch_qos_logback_logback_classic",
+        "@maven//:org_apache_logging_log4j_log4j_to_slf4j"
+    ]
+)

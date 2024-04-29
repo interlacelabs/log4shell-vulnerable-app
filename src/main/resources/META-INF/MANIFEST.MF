@@ -1,0 +1,1 @@
+Main-Class: fr.christophetd.log4shell.vulnerableapp.VulnerableAppApplication
