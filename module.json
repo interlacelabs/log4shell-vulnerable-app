@@ -1,0 +1,79 @@
+{
+  "formatVersion": "1.1", 
+  "component": {
+    "group": "fr.christophetd.log4shell",
+    "module": "log4shell-vulnerable-app",
+    "version": "0.0.1-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "your-artifact-0.0.1-plain.jar",
+          "url": "your-artifact-0.0.1-plain.jar",
+          "size": 2664,
+          "sha512": "641f72d3427ef6ab8d206b70a4c900c67053ec4e05e2aac0392bd97f8407ec75bb8113d0bf8732e10d505ed879047664e1adf078f961e9c15ac1e1ef027af9ee",
+          "sha256": "006037c6fc216821402ac480c0b3a3463855f36eac7400ab6f8ed87fefc3772b",
+          "sha1": "0b9b5c1d349797edaba9a2fcb434df2c5dde4d12",
+          "md5": "b78c70f420e5d1a76a6e92c90ab9fe80"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-web",
+          "excludes": [
+            {
+              "group": "org.springframework.boot",
+              "module": "spring-boot-starter-logging"
+            }
+          ]
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-log4j2",
+          "version": {
+            "requires": "2.6.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "your-artifact-0.0.1-plain.jar",
+          "url": "your-artifact-0.0.1-plain.jar",
+          "size": 2664,
+          "sha512": "641f72d3427ef6ab8d206b70a4c900c67053ec4e05e2aac0392bd97f8407ec75bb8113d0bf8732e10d505ed879047664e1adf078f961e9c15ac1e1ef027af9ee",
+          "sha256": "006037c6fc216821402ac480c0b3a3463855f36eac7400ab6f8ed87fefc3772b",
+          "sha1": "0b9b5c1d349797edaba9a2fcb434df2c5dde4d12",
+          "md5": "b78c70f420e5d1a76a6e92c90ab9fe80"
+        }
+      ]
+    }
+  ]
+}
